@@ -1,0 +1,42 @@
+- name: Install ELK
+  hosts: elk
+  become: true
+  tasks:
+          - ansible.posix.sysctl:
+              name: vm.max_map_count
+              value: '262144'
+              state: present
+
+          - name: Install docker
+            apt:
+                    name: docker.io
+                    force_apt_get: yes
+                    update_cache: yes
+                    state: present
+
+          - name: INstall phython
+            apt:
+                    name: python3-pip
+                    state: present
+          - name: Install Docker
+            pip:
+                    name: docker
+                    state: present
+
+          - name: Install docker
+            pip:
+                    name: docker
+                    state: present
+
+          - name: Install Docker container
+            docker_container:
+                    name: elk
+                    image: sebp/elk:761
+                    state: started
+                    published_ports: 5601:5601,9200:9200,5044:5044
+                    restart_policy: always
+
+          - name: Ensure to docer is started when VM restarts
+            systemd:
+              name: docker
+              enabled: yes
