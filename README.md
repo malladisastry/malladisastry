@@ -143,7 +143,7 @@ SSH into the control node and follow the steps below:
 Run playbook as follows
 ansible-playbook install_elk.yml
 
-Navigate to http://<elk server ip address>:5601/app/kibana#/home to ensure that Kibana page is accessible
+Navigate to http://_elk server ip address_:5601/app/kibana#/home to ensure that Kibana page is accessible
 
 
 
